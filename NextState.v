@@ -530,23 +530,23 @@ module NextState #(parameter map_width = 8)
     for (genvar i = 0; i <= map_width*(map_width - 1); i = i + map_width) begin
         for (genvar j = 0; j < map_width; j = j + 1) begin
             if (i + j == 0)
-                assign next_state[i + j] = solve_cell({4'b0000, state[i + j], state[i + j + 1], 1'b0, state[i + j + map_width], state[i + j + map_width + 1]});
+                assign state_out[i + j] = solve_cell({4'b0000, state_in[i + j], state_in[i + j + 1], 1'b0, state_in[i + j + map_width], state_in[i + j + map_width + 1]});
             else if (i == 0 && j > 0 && j < map_width - 1)
-                assign next_state[i + j] = solve_cell({3'b000, state[i + j - 1], state[i + j], state[i + j + 1], state[i + j + map_width - 1], state[i + j + map_width], state[i + j + map_width + 1]});
+                assign state_out[i + j] = solve_cell({3'b000, state_in[i + j - 1], state_in[i + j], state_in[i + j + 1], state_in[i + j + map_width - 1], state_in[i + j + map_width], state_in[i + j + map_width + 1]});
             else if (i + j == map_width - 1)
-                assign next_state[i + j] = solve_cell({3'b000, state[i + j - 1], state[i + j], 1'b0, state[i + j + map_width - 1], state[i + j + map_width], 1'b0});
+                assign state_out[i + j] = solve_cell({3'b000, state_in[i + j - 1], state_in[i + j], 1'b0, state_in[i + j + map_width - 1], state_in[i + j + map_width], 1'b0});
             else if (i > 0 && i < map_width*(map_width - 1) && j == 0)
-                assign next_state[i + j] = solve_cell({1'b0, state[i + j - map_width], state[i + j - map_width + 1], 1'b0, state[i + j], state[i + j + 1], 1'b0, state[i + j + map_width], state[i + j + map_width + 1]});
+                assign state_out[i + j] = solve_cell({1'b0, state_in[i + j - map_width], state_in[i + j - map_width + 1], 1'b0, state_in[i + j], state_in[i + j + 1], 1'b0, state_in[i + j + map_width], state_in[i + j + map_width + 1]});
             else if (i > 0 && i < map_width*(map_width - 1) && j == map_width - 1)
-                assign next_state[i + j] = solve_cell({state[i + j - map_width - 1], state[i + j - map_width], 1'b0, state[i + j - 1], state[i + j], 1'b0, state[i + j + map_width - 1], state[i + j + map_width], 1'b0});
+                assign state_out[i + j] = solve_cell({state_in[i + j - map_width - 1], state_in[i + j - map_width], 1'b0, state_in[i + j - 1], state_in[i + j], 1'b0, state_in[i + j + map_width - 1], state_in[i + j + map_width], 1'b0});
             else if (i + j == map_width*(map_width - 1))
-                assign next_state[i + j] = solve_cell({1'b0, state[i + j - map_width], state[i + j - map_width + 1], 1'b0, state[i + j], state[i + j + 1], 3'b000});
+                assign state_out[i + j] = solve_cell({1'b0, state_in[i + j - map_width], state_in[i + j - map_width + 1], 1'b0, state_in[i + j], state_in[i + j + 1], 3'b000});
             else if (i == map_width*(map_width - 1) && j > 0 && j < map_width - 1)
-                assign next_state[i + j] = solve_cell({state[i + j - map_width - 1], state[i + j - map_width], state[i + j - map_width + 1], state[i + j - 1], state[i + j], state[i + j + 1], 3'b000});
+                assign state_out[i + j] = solve_cell({state_in[i + j - map_width - 1], state_in[i + j - map_width], state_in[i + j - map_width + 1], state_in[i + j - 1], state_in[i + j], state_in[i + j + 1], 3'b000});
             else if (i + j == map_width*map_width - 1)
-                assign next_state[i + j] = solve_cell({state[i + j - map_width - 1], state[i + j - map_width], 1'b0, state[i + j - 1], state[i + j], 1'b0, 3'b000});
+                assign state_out[i + j] = solve_cell({state_in[i + j - map_width - 1], state_in[i + j - map_width], 1'b0, state_in[i + j - 1], state_in[i + j], 1'b0, 3'b000});
             else
-                assign next_state[i + j] = solve_cell({state[i + j - map_width - 1], state[i + j - map_width], state[i + j - map_width + 1], state[i + j - 1], state[i + j], state[i + j + 1], state[i + j + map_width - 1], state[i + j + map_width], state[i + j + map_width + 1]});
+                assign state_out[i + j] = solve_cell({state_in[i + j - map_width - 1], state_in[i + j - map_width], state_in[i + j - map_width + 1], state_in[i + j - 1], state_in[i + j], state_in[i + j + 1], state_in[i + j + map_width - 1], state_in[i + j + map_width], state_in[i + j + map_width + 1]});
         end
     end
     endgenerate
