@@ -1,18 +1,27 @@
 `timescale 1ns / 1ps
 
-module Map #(parameter map_width = 8)
+module Map #(parameter map_width = 8, parameter map_height = 8)
     (
     input wire clock,
     input wire enable,
     input wire reset,
-    input wire [map_width**2-1:0] state_in,
-    output reg [map_width**2-1:0] state_out
+    input wire [map_width*map_height-1:0] state_in,
+    input wire [map_width*map_height-1:0] state_init,
+    output reg [map_width*map_height-1:0] state_out
     );
     
+    reg init = 1;
+    
     always @(posedge clock or posedge reset) begin
-        if (reset)
+        if (!reset) begin
             state_out <= 0;
-        else if (enable)
-            state_out <= state_in;
+            init <= 1;
+        end else if (enable) begin
+            if (init)
+                state_out <= state_init;
+            else
+                state_out <= state_in;
+            init <= 0;
+        end
     end
 endmodule
