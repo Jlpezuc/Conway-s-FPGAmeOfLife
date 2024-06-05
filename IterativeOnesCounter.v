@@ -5,7 +5,7 @@
 // 
 // Create Date: 04.06.2024 23:31:17
 // Design Name: 
-// Module Name: IterativeCounter
+// Module Name: IterativeOnesCounter
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,7 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module IterativeCounter  #(parameter vector_leght = 2)
+module IterativeOnesCounter  #(parameter vector_leght = 2)
     (
     input  wire [vector_leght-1:0] vector_in,
     output wire [$clog2(vector_leght + 1) - 1:0] count_out
