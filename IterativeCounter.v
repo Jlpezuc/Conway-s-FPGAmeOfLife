@@ -1,26 +1,6 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 04.06.2024 23:31:17
-// Design Name: 
-// Module Name: IterativeCounter
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
 
-
-module IterativeCounter  #(parameter vector_leght = 2)
+module IterativeCounter  #(parameter vector_leght = 64)
     (
     input  wire [vector_leght-1:0] vector_in,
     output wire [$clog2(vector_leght + 1) - 1:0] count_out
