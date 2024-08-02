@@ -1,29 +1,10 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 05.06.2024 12:50:47
-// Design Name: 
-// Module Name: RGBDriver
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
 
-
-module RGBDriver #(parameter map_width = 8,
-                   parameter map_height = 8,
-                   parameter clock_frequency = 100_000_000,
-                   parameter pwm_frequency = 1_000)
+module RGBDriver
+    #(parameter map_width = 8,
+      parameter map_height = 8,
+      parameter clock_frequency = 100_000_000,
+      parameter pwm_frequency = 1_000)
     (
     input clock,
     input reset,
@@ -47,7 +28,8 @@ module RGBDriver #(parameter map_width = 8,
         .count_out(count)
     );
     
-    ClockDivider #(.divisor(divisor)) clock_divider_inst (
+    ClockDivider clock_divider_inst (
+        .divisor(divisor),
         .reset(reset),
         .clock_in(clock),
         .clock_out(clock_divided)
