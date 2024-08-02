@@ -1,24 +1,4 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 05.06.2024 13:22:06
-// Design Name: 
-// Module Name: PWM
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
-
 
 module PWM #(parameter max_counter = 100_000_000)
     (
@@ -31,7 +11,7 @@ module PWM #(parameter max_counter = 100_000_000)
     localparam MAX_COUNT = $rtoi($floor($itor(max_counter))); 
     reg [$clog2(max_counter + 1) - 1:0] count = 0;
 
-    always @(posedge clock or negedge reset) begin
+    always @(posedge clock) begin
         if (!reset) begin
             count = 0;
         end else begin
