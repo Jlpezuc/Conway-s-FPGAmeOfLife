@@ -2,17 +2,17 @@
 
 module Map #(parameter map_width = 8, parameter map_height = 8)
     (
-    input wire clock,
-    input wire enable,
-    input wire reset,
-    input wire [map_width*map_height-1:0] state_in,
-    input wire [map_width*map_height-1:0] state_init,
+    input clock,
+    input enable,
+    input reset,
+    input [map_width*map_height-1:0] state_in,
+    input [map_width*map_height-1:0] state_init,
     output reg [map_width*map_height-1:0] state_out
     );
     
     reg init = 1;
     
-    always @(posedge clock or posedge reset) begin
+    always @(posedge clock) begin
         if (!reset) begin
             state_out <= 0;
             init <= 1;
@@ -25,3 +25,4 @@ module Map #(parameter map_width = 8, parameter map_height = 8)
         end
     end
 endmodule
+
